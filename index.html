@@ -1,188 +1,208 @@
-
-
 <!DOCTYPE html>
-<!-- Coding By socialWork-->
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>de messie</title>
-      <style>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <style>
+        body {
+            animation: colorChange 5s infinite;
+            background: linear-gradient(blue, purple);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            font-family: georgia;
+        }
 
-/* Import socialWork t - Poppins */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+        .calculator {
+            background: linear-gradient(blue, purple);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
 
-}
-body {
-  animation: colorChange 5s infinite;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+        .display {
+            width: 95%;
+            height: 60px;
+            background: skyblue;
+            border: 2px solid #ccc;
+            border-radius: 30px;
+            text-align: right;
+            font-size: 2rem;
+            padding: 10px;
+            margin-bottom: 20px;
+            outline: none;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-@keyframes colorChange {
-  0% { background: linear-gradient(90deg, red, orange); }
-  25% { background: linear-gradient(90deg, blue, purple); }
-  50% { background: linear-gradient(90deg, green, red); }
-  75% { background: linear-gradient(90deg, blue,purple); }
-  100% { background: linear-gradient(90deg, red, orange); }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
 
-  
-}
+        .button {
+            height: 60px;
+            background: #007bff;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
 
+        .button:hover {
+            background: #0056b3;
+            transform: scale(1.1);
+        }
 
+        .button:active {
+            background-color: red;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            transform: scale(0.95);
+        }
 
+        .button.equal {
+            background: #28a745;
+        }
 
+        .button.equal:hover {
+            background: #218838;
+        }
 
-.container {
-  position: relative;
-  max-width: 500px;
-  width: 100%;
-  height:80%;
-  border-radius: 32px;
-  padding: 20px 20px 20px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  @keyframes colorChange {
-  0% { background: linear-gradient(90deg, red, orange); }
-  25% { background: linear-gradient(90deg, blue, purple); }
-  50% { background: linear-gradient(90deg, green, yellow); }
-  75% { background: linear-gradient(90deg, pink, cyan); }
-  100% { background: linear-gradient(90deg, gray, red); }
+        .button.equal:active {
+            background-color: red;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            transform: scale(0.95);
+        }
 
-  
-  }
-  
-}
-.display {
-background-color: black;
-  height: 50px;
-  width: 320px;
-  outline: none;
-  border-radius:15px;
-  border: none;
-  text-align: center;
-  margin-bottom: 10px;
-  font-size: 25px;
-  font-family:georgia;
-  color: red;
-  pointer-events: none;
-}
-.buttons {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: repeat(4, 1fr);
-}
-.buttons button {
-  padding: 10px;
-  border-radius: 15px;
-  border: none;
-  font-size: 20px;
-  color: red;
-  background-color: black;
-  
-  outline: none;
-  transition: box-shadow 0.3s ease-in-out;
-}
+        .button.special {
+            background: #ffc107;
+            color: #212529;
+        }
 
-.buttons button:active,
+        .button.special:hover {
+            background: #e0a800;
+        }
+
+        .button.special:active {
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 193, 7, 1) 100%);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            transform: scale(0.95);
+        }
+
+        .autor {
+            display: inline-block;
+            background: linear-gradient(to right, #ff6a00, #ee0979);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .autor:hover {
+            box-shadow: 0 0 20px rgba(255, 106, 0, 0.8), 0 0 30px rgba(238, 9, 121, 0.8);
+            transform: scale(1.1);
+        }
+
+        .autor:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+        }
+
+         .buttons button:active,
 .buttons button:hover {
   box-shadow: 0 0 50px 20px yellow;
+    transition: box-shadow 0.2s ease-in-out;
 }
-.img {
-    border-radius : 55px;
-}
-   </style> 
-       <link rel="stylesheet" href="style.css" />
-             
-  </head>
-  <body>
+}       
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button class="button" onclick="appendValue('7')">7</button>
+            <button class="button" onclick="appendValue('8')">8</button>
+            <button class="button" onclick="appendValue('9')">9</button>
+            <button class="button operation" onclick="appendValue('/')">÷</button>
 
- 
-    <div class="container">
-        
-                         <img src="https://i.imgur.com/CdfCvra.jpeg" width="320px" height="110px">
-                         
-        <h3><code>pour vos calculatrices simples </code></h3>
-      <input type="text" class="display" />
+            <button class="button" onclick="appendValue('4')">4</button>
+            <button class="button" onclick="appendValue('5')">5</button>
+            <button class="button" onclick="appendValue('6')">6</button>
+            <button class="button operation" onclick="appendValue('*')">×</button>
 
-      <div class="buttons">
-        <button class="operator" data-value="AC">AC</button>
-        <button class="operator" data-value="DEL">DEL</button>
-        <button class="operator" data-value="%">%</button>
-        <button class="operator" data-value="/">/</button>
+            <button class="button" onclick="appendValue('1')">1</button>
+            <button class="button" onclick="appendValue('2')">2</button>
+            <button class="button" onclick="appendValue('3')">3</button>
+            <button class="button operation" onclick="appendValue('-')">-</button>
 
-        <button data-value="7">7</button>
-        <button data-value="8">8</button>
-        <button data-value="9">9</button>
-        <button class="operator" data-value="*">x</button>
+            <button class="button" onclick="appendValue('0')">0</button>
+            <button class="button" onclick="appendValue('.')">.</button>
+            <button class="button" onclick="deleteLast()">DEL</button>
+            <button class="button operation" onclick="appendValue('+')">+</button>
 
-        <button data-value="4">4</button>
-        <button data-value="5">5</button>
-        <button data-value="6">6</button>
-        <button class="operator" data-value="-">-</button>
-
-        <button data-value="1">1</button>
-        <button data-value="2">2</button>
-        <button data-value="3">3</button>
-        <button class="operator" data-value="+">+</button>
-
-        <button data-value="0">0</button>
-        <button data-value="00">00</button>
-        <button data-value=".">.</button>
-        <button class="operator" data-value="=">=</button>
-      </div>
-      
+            <button class="button special" onclick="calculateSquareRoot()">√</button>
+            <button class="button special" onclick="calculatePower()">xʸ</button>
+            <button class="button" onclick="clearDisplay()">C</button>
+            <button class="button equal" onclick="calculate()">=</button>
+        </div>
+        <a href="https://www.facebook.com/profile.php?id=61564382117276" class="autor">Auteur</a>
     </div>
 
-    
-  
     <script>
-        const display = document.querySelector(".display");
-const buttons = document.querySelectorAll("button");
-const specialChars = ["%", "x", "/", "-", "+", "="];
-let output = "";
+        const display = document.getElementById('display');
 
-//Define function to calculate based on button clicked.
-const calculate = (btnValue) => {
-  display.focus();
-  if (btnValue === "=" && output !== "") {
-    //If output has '%', replace with '/100' before evaluating.
-    output = eval(output.replace("%", "/100"));
-  } else if (btnValue === "AC") {
-    output = "";
-  } else if (btnValue === "DEL") {
-    //If DEL button is clicked, remove the last character from the output.
-    output = output.toString().slice(0, -1);
-  } else {
-    //If output is empty and button is specialChars then return
-    if (output === "" && specialChars.includes(btnValue)) return;
-    output += btnValue;
-  }
-  display.value = output;
-};
+        function appendValue(value) {
+            display.value += value;
+        }
 
-//Add event listener to buttons, call calculate() on click.
-buttons.forEach((button) => {
-  //Button click listener calls calculate() with dataset value as argument.
-  button.addEventListener("click", (e) => calculate(e.target.dataset.value));
-});
+        function clearDisplay() {
+            display.value = '';
+        }
 
-const button = document.querySelector('.buttons button');
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
 
-button.addEventListener('click', () => {
-  button.classList.add('glow');
-  setTimeout(() => {
-    button.classList.remove('glow');
-  }, 300); // Durée de l'effet (en millisecondes)
-});
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch {
+                display.value = 'Erreur';
+            }
+        }
+
+        function calculateSquareRoot() {
+            try {
+                display.value = Math.sqrt(parseFloat(display.value));
+            } catch {
+                display.value = 'Erreur';
+            }
+        }
+
+        function calculatePower() {
+            const base = parseFloat(display.value);
+            const exponent = prompt('Entrez l\'exposant :');
+            if (!isNaN(base) && !isNaN(exponent)) {
+                display.value = Math.pow(base, exponent);
+            } else {
+                display.value = 'Erreur';
+            }
+        }
     </script>
-  </body>
-          </html>
-          
+</body>
+</html>
+
